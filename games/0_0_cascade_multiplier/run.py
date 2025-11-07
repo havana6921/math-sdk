@@ -1,6 +1,19 @@
 """Entry point for running cascade multiplier simulations."""
 
+import sys
 import time
+from pathlib import Path
+
+# Ensure the repository root is on ``sys.path`` when the script is executed
+# directly (``python games/0_0_cascade_multiplier/run.py``).  When Python runs
+# a module as a script it only inserts the script directory (``.../games``) on
+# ``sys.path`` which prevents absolute imports like ``src.*`` from resolving.
+# Inserting the project root restores the environment expected by the game
+# modules without requiring callers to modify ``PYTHONPATH``.
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from gamestate import GameState
 from game_config import GameConfig
 from game_optimization import OptimizationSetup
