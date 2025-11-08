@@ -1,6 +1,20 @@
 """Entry point for running cascade multiplier simulations."""
 
+import os
+import sys
 import time
+
+
+# Ensure the project root is on ``sys.path`` so ``src`` and other top-level
+# packages can be imported when the script is executed directly (e.g. via
+# ``python games/0_0_cascade_multiplier/run.py`` on Windows).
+CURRENT_DIR = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, os.pardir, os.pardir))
+for path in (CURRENT_DIR, PROJECT_ROOT):
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+
 from gamestate import GameState
 from game_config import GameConfig
 from game_optimization import OptimizationSetup
